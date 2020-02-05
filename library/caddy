@@ -4,12 +4,12 @@ Tags: v2.0.0-beta.13, v2.0.0-beta.13-alpine, alpine, latest
 GitRepo: https://github.com/caddyserver/caddy-docker.git
 Directory: alpine
 GitFetch: refs/heads/build-overhaul
-GitCommit: fb7cfcb899f52866ebe112365bd5c0c3a2198171
+GitCommit: 942f08dc868c0f5fb27a4316f3ad096858270104
 Architectures: amd64
 
 Tags: v2.0.0-beta.13-slim, scratch
 GitRepo: https://github.com/caddyserver/caddy-docker.git
 Directory: scratch
 GitFetch: refs/heads/build-overhaul
-GitCommit: fb7cfcb899f52866ebe112365bd5c0c3a2198171
+GitCommit: 942f08dc868c0f5fb27a4316f3ad096858270104
 Architectures: amd64

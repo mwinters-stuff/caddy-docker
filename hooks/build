@@ -1,4 +1,12 @@
 #!/bin/bash
 set -exo pipefail
 
-bashbrew --library ./library --namespace caddy build caddy
+# install bashbrew for the build
+docker create --name bb hairyhenderson/bashbrew
+docker cp bb:/bin/bashbrew .
+
+export BASHBREW_LIBRARY=./library
+export BASHBREW_NAMESPACE=caddy
+
+./bashbrew build caddy
+./bashbrew push --dry-run caddy
