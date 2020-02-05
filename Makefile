@@ -1,2 +1,4 @@
+gen-dockerfiles: alpine/Dockerfile scratch/Dockerfile
+
 %/Dockerfile: %/base.img Dockerfile.tmpl
-	gomplate -d base=$< -f Dockerfile.tmpl -o $@
+	@gomplate -d base=$< -f Dockerfile.tmpl -o $@
