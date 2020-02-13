@@ -3,17 +3,17 @@ FROM golang:1.13.6-alpine as builder
 WORKDIR /src
 
 RUN apk add --no-cache \
-    git \
+    wget \
     ca-certificates
 
 ARG CADDY_SOURCE_VERSION=v1.0.4
 # -b $CADDY_SOURCE_VERSION
-RUN git clone https://github.com/caddyserver/caddy.git --single-branch
+RUN wget https://github.com/caddyserver/caddy/releases/download/v1.0.4/caddy_v1.0.4_linux_arm64.tar.gz
 
-WORKDIR /src/caddy/caddy
-
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 \
-    go build -trimpath -tags netgo -ldflags '-extldflags "-static" -s -w' -o /usr/bin/caddy
+RUN tar xvf caddy_v1.0.4_linux_arm64.tar.gz
+# WORKDIR /src/
+# RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 \
+#     go build -trimpath -tags netgo -ldflags '-extldflags "-static" -s -w' -o /usr/bin/caddy
 
 # Fetch the latest default welcome page and default Caddy config
 FROM alpine:3.11.3 AS fetch-assets
@@ -32,7 +32,7 @@ RUN cp welcome/index.html /index.html
 FROM alpine:3.11.3 AS alpine
 RUN apk add --no-cache bash
 
-COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+COPY --from=builder /src/caddy /usr/bin/caddy
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs
 
 COPY --from=fetch-assets /Caddyfile /etc/caddy/Caddyfile
