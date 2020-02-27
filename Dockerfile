@@ -18,7 +18,7 @@ WORKDIR /src
 ARG CADDY_SOURCE_VERSION=v1.0.4
 ARG CADDY_FILE_VERSION=v1.0.4
 ARG CADDY_ARCH=arm64
-RUN wget https://github.com/caddyserver/caddy/releases/download/${CADDY_SOURCE_VERSION}/caddy_${CADDY_FILE_VERSION}_linux_${CADDY_ARCH}.tar.gz
+RUN wget https://github.com/caddyserver/caddy/releases/download/${CADDY_SOURCE_VERSION}/${CADDY_FILE_VERSION}_linux_${CADDY_ARCH}.tar.gz
 RUN tar xvf caddy_${CADDY_FILE_VERSION}_linux_${CADDY_ARCH}.tar.gz
 
 
